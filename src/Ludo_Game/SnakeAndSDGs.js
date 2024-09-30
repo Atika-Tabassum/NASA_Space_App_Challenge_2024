@@ -1,13 +1,19 @@
 import React, { useState } from "react";
-import redCircle from "./Images/red_circle.png"; // player1
-import yellowCircle from "./Images/yellow_circle.png"; // player2
+import redCircle from "./Images/red_circle.png";
+import yellowCircle from "./Images/yellow_circle.png";
+import QuizModal from "./QuizModal";
 import "./SnakeAndSDGs.css";
+import quizzes from "./Quiz";
 
 const SnakeAndSDGs = () => {
-  const [player1Position, setplayer1Position] = useState(0);
-  const [player2Position, setplayer2Position] = useState(0);
+  const [player1Position, setPlayer1Position] = useState(0);
+  const [player2Position, setPlayer2Position] = useState(0);
   const [message, setMessage] = useState("");
-  const [isPlayerTurn, setIsPlayerTurn] = useState(true); 
+  const [isPlayerTurn, setIsPlayerTurn] = useState(true);
+  const [showQuiz, setShowQuiz] = useState(false);
+  const [currentSnakePosition, setCurrentSnakePosition] = useState(null);
+  const [diceValue, setDiceValue] = useState(null);
+  const [currentQuiz, setCurrentQuiz] = useState(null);
 
   const snakes = {
     17: 7,
@@ -33,22 +39,20 @@ const SnakeAndSDGs = () => {
 
   const renderBoard = () => {
     const board = [];
-    let currentNumber = 100; // Start from 100
+    let currentNumber = 100;
 
     for (let row = 0; row < 10; row++) {
       const rowCells = [];
 
-     
       if (row % 2 === 0) {
-       
         for (let col = 0; col < 10; col++) {
           rowCells.push(
             <div key={currentNumber} className="board-cell">
               {currentNumber === player1Position && (
-                <img src={redCircle} alt="Player" className="token" />
+                <img src={redCircle} alt="Player1" className="token" />
               )}
               {currentNumber === player2Position && (
-                <img src={yellowCircle} alt="Bot" className="token" />
+                <img src={yellowCircle} alt="Player2" className="token" />
               )}
               <span className="cell-number">{currentNumber}</span>
             </div>
@@ -56,8 +60,7 @@ const SnakeAndSDGs = () => {
           currentNumber--;
         }
       } else {
-        
-        const startNumber = currentNumber - 9; 
+        const startNumber = currentNumber - 9;
         for (let col = 0; col < 10; col++) {
           rowCells.push(
             <div key={startNumber + col} className="board-cell">
@@ -71,10 +74,9 @@ const SnakeAndSDGs = () => {
             </div>
           );
         }
-        currentNumber -= 10; 
+        currentNumber -= 10;
       }
 
-  
       board.push(
         <div key={row} className="board-row">
           {rowCells}
@@ -86,20 +88,22 @@ const SnakeAndSDGs = () => {
   };
 
   const rollDice = () => {
-    return Math.floor(Math.random() * 6) + 1;
+    const value = Math.floor(Math.random() * 6) + 1;
+    setDiceValue(value);
+    return value;
   };
 
   const movePlayer = () => {
     if (player1Position === 100 || player2Position === 100) {
-      return; 
+      return;
     }
 
-    const diceValue = rollDice();
+    const dice = rollDice();
     let newPosition;
 
     if (isPlayerTurn) {
-      setMessage(`Player1 rolls: ${diceValue}`);
-      newPosition = player1Position + diceValue;
+      setMessage(`Player1 rolls: ${dice}`);
+      newPosition = player1Position + dice;
 
       if (newPosition > 100) {
         setMessage(`Player1 stays at ${player1Position}`);
@@ -107,19 +111,22 @@ const SnakeAndSDGs = () => {
       }
 
       if (snakes[newPosition]) {
-        setMessage(`Player1 bitten by snake at ${newPosition}`);
-        newPosition = snakes[newPosition];
+        setCurrentSnakePosition(newPosition);
+        const randomQuiz = quizzes[Math.floor(Math.random() * quizzes.length)];
+        setCurrentQuiz(randomQuiz);
+        setShowQuiz(true);
+        return;
       } else if (ladders[newPosition]) {
         setMessage(`Player1 climbed ladder at ${newPosition}`);
         newPosition = ladders[newPosition];
       } else {
-        setMessage(`Player moved to ${newPosition}`);
+        setMessage(`Player1 moved to ${newPosition}`);
       }
 
-      setplayer1Position(newPosition);
+      setPlayer1Position(newPosition);
     } else {
-      setMessage(`Player2 rolls: ${diceValue}`);
-      newPosition = player2Position + diceValue;
+      setMessage(`Player2 rolls: ${dice}`);
+      newPosition = player2Position + dice;
 
       if (newPosition > 100) {
         setMessage(`Player2 stays at ${player2Position}`);
@@ -127,8 +134,11 @@ const SnakeAndSDGs = () => {
       }
 
       if (snakes[newPosition]) {
-        setMessage(`Player2 bitten by snake at ${newPosition}`);
-        newPosition = snakes[newPosition];
+        setCurrentSnakePosition(newPosition);
+        const randomQuiz = quizzes[Math.floor(Math.random() * quizzes.length)];
+        setCurrentQuiz(randomQuiz);
+        setShowQuiz(true);
+        return;
       } else if (ladders[newPosition]) {
         setMessage(`Player2 climbed ladder at ${newPosition}`);
         newPosition = ladders[newPosition];
@@ -136,7 +146,7 @@ const SnakeAndSDGs = () => {
         setMessage(`Player2 moved to ${newPosition}`);
       }
 
-      setplayer2Position(newPosition);
+      setPlayer2Position(newPosition);
     }
 
     if (newPosition === 100) {
@@ -149,19 +159,46 @@ const SnakeAndSDGs = () => {
     setIsPlayerTurn(!isPlayerTurn);
   };
 
+  const handleQuizAnswer = (isCorrect) => {
+    if (isCorrect) {
+      setMessage("Correct answer! No punishment.");
+    } else {
+      setMessage(
+        `Wrong answer! Player bitten by snake at ${currentSnakePosition}`
+      );
+      if (isPlayerTurn) {
+        setPlayer1Position(snakes[currentSnakePosition]);
+      } else {
+        setPlayer2Position(snakes[currentSnakePosition]);
+      }
+    }
+    setShowQuiz(false);
+    setCurrentSnakePosition(null);
+    setIsPlayerTurn(!isPlayerTurn);
+  };
+
   return (
     <div className="game-container">
       <h1>Snake and Ladders</h1>
       <p>{message}</p>
+      <p>Dice Roll: {diceValue}</p>
       <p>Player1 Position: {player1Position}</p>
-      <p> Position: {player2Position}</p>
+      <p>Player2 Position: {player2Position}</p>
       <button
         onClick={movePlayer}
-        disabled={player1Position === 100 || player2Position === 100}
+        disabled={
+          player1Position === 100 || player2Position === 100 || showQuiz
+        }
       >
         {isPlayerTurn ? "Player1 Roll Dice" : "Player2 Roll Dice"}
       </button>
       <div className="board">{renderBoard()}</div>
+      <QuizModal
+        show={showQuiz}
+        onClose={() => setShowQuiz(false)}
+        quiz={currentQuiz}
+        onAnswer={handleQuizAnswer}
+      />
     </div>
   );
 };
