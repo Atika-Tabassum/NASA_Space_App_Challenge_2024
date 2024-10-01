@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import redCircle from "./Images/red_circle.png";
 import yellowCircle from "./Images/yellow_circle.png";
 import QuizModal from "./QuizModal";
+import WinnerModal from "./WinnerModal";
 import "./SnakeAndSDGs.css";
 import quizzes from "./Quiz";
 
@@ -14,6 +15,7 @@ const SnakeAndSDGs = () => {
   const [currentSnakePosition, setCurrentSnakePosition] = useState(null);
   const [diceValue, setDiceValue] = useState(null);
   const [currentQuiz, setCurrentQuiz] = useState(null);
+  const [winner, setWinner] = useState(null);
 
   const snakes = {
     17: 7,
@@ -150,9 +152,7 @@ const SnakeAndSDGs = () => {
     }
 
     if (newPosition === 100) {
-      setMessage(
-        isPlayerTurn ? "Player1 has won the game!" : "Player2 has won the game!"
-      );
+      setWinner(isPlayerTurn ? "Player1" : "Player2"); // Declare the winner
       return;
     }
 
@@ -177,6 +177,15 @@ const SnakeAndSDGs = () => {
     setIsPlayerTurn(!isPlayerTurn);
   };
 
+  const restartGame = () => {
+    setPlayer1Position(0);
+    setPlayer2Position(0);
+    setMessage("");
+    setIsPlayerTurn(true);
+    setDiceValue(null);
+    setWinner(null);
+  };
+
   return (
     <div className="game-container">
       <h1>Snake and Ladders</h1>
@@ -199,6 +208,8 @@ const SnakeAndSDGs = () => {
         quiz={currentQuiz}
         onAnswer={handleQuizAnswer}
       />
+
+      <WinnerModal winner={winner} onRestart={restartGame} show={!!winner} />
     </div>
   );
 };
