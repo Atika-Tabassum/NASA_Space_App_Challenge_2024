@@ -1,0 +1,111 @@
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  
+  /* Body styling */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #eedef5;
+    color: #401949;
+  }
+  
+  /* Header styling */
+  .stone-header {
+    background-color: #5a147a;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  /* Game container styling */
+  .stone-game-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(76, 20, 90, 0.1);
+    border-radius: 8px;
+  }
+  
+  /* Choices layout */
+  .stone-choices {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+  }
+  
+  /* Individual choice styling */
+  .stone-choice {
+    height: 165px;
+    width: 165px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s;
+    cursor: pointer;
+  }
+  
+  .stone-choice:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Image styling */
+  .stone-image {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  /* Quiz container styling */
+  .stone-quiz-container {
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #e7f3fe;
+    border: 1px solid #dab9e8;
+    border-radius: 8px;
+  }
+  
+  .stone-quiz-container label {
+    display: block; /* Change from inline to block for vertical stacking */
+    margin: 10px 0; /* Add some space between options */
+  }
+  
+  .stone-button {
+    padding: 10px 15px;
+    background-color: #081b31;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .stone-button:hover {
+    background-color: #0a2d4a;
+  }
+  
+  
+  /* Message styling */
+  .stone-msg {
+    background-color: #422168;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+  
+  /* Score header styling */
+  .stone-score {
+    margin: 10px 0;
+  }
+  
+ 
+  
