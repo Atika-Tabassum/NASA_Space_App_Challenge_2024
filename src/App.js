@@ -5,8 +5,8 @@ import MemoryGame from "./memory card/memory_card";
 function App() {
   return (
     <div className="App">
-      {/* <Ludo /> */}
-      <MemoryGame/>
+      <Ludo />
+      {/* <MemoryGame/> */}
     </div>
   );
 }
