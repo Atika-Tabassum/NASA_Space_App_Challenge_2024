@@ -1,35 +1,8 @@
-body {
-  margin-top: 300px;
-  padding: 0;
-  font-family: 'Roboto', sans-serif;
-  background-color: #cde4f3;
-}
-
-.header-icons {
-  z-index: 200;
-  padding-left: 10px;
-  height: 170px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 20px;
-  background-color: #a3d2f1;
-  border-bottom-width: 0.5px;
-  border-bottom-style: solid;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-}
-
 .logo-section {
   position: relative;
 }
 
 .logo-section img {
-  /* width: 100px; */
   height: 160px;
 }
 
@@ -38,7 +11,7 @@ body {
   border-radius: 50%;
 }
 
-.card {
+.card--container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 70px;
@@ -46,12 +19,38 @@ body {
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
+
+}
+
+.card__image img {
+  position: relative;
+  height: 130px;
+  padding: 20px;
+  margin: 4px;
+  background-color: white;
+  border-radius: 10px;
+  border-style: solid;
   transition: transform 0.3s ease;
+  border-width: 3px;
+  box-shadow: 0 0 13px rgba(0, 0, 0, 0.3);
+}
+
+.card__image img:hover {
+  transform: scale(1.02);
+}
+
+/* .card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 70px;
+  padding: 40px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .card__image {
   position: relative;
-  overflow: hidden;
 }
 
 .card__image img {
@@ -68,4 +67,15 @@ body {
 
 .card__image:hover img {
   transform: scale(1.03);
+} */
+
+.card--content {
+  font-family: "Play", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: larger;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
