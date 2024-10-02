@@ -17,6 +17,11 @@ const gotoGames = () => {
 const gotoStats = () => {
   window.location.href = "/sustainify/stats";
 };
+
+const gotoStudy = () => { 
+  window.location.href = "/sustainify/study";
+}
+
 const Home = () => {
   return <Fragment>
     <div>
@@ -24,7 +29,7 @@ const Home = () => {
       <div className="card--container">
 
         <div className="card__image">
-          <img src={img1} alt="img1" />
+          <img src={img1} alt="img1" onClick={gotoStudy} />
           <p className="card--content">STUDY PLAN</p>
         </div>
         <div className="card__image">
