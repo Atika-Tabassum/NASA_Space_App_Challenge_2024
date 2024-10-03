@@ -8,6 +8,7 @@ import GamePage from "./games/gamePage";
 import FetchDataComponent from './apis/FetchDataComponent';
 import Study from './study/Study';
 import DailyGoal from './dailygoal/DailyGoal';
+import Awareness from './awareness/Awareness';
 function App() {
   return (
     <Router>
@@ -23,6 +24,7 @@ function App() {
           <Route path="/sustainify/ludo" element={<Ludo />} />
           <Route path="/sustainify/memory" element={<MemoryGame />} />
           <Route path="/sustainify/dailygoal" element={<DailyGoal />} />
+          <Route path="/sustainify/awareness" element={<Awareness />} />
         </Routes>
       </Fragment>
     </Router>
