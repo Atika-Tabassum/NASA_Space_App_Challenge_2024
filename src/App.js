@@ -19,6 +19,8 @@ function App() {
           <Route path="/sustainify/games" element={<GamePage />} />
           <Route path="/sustainify/fetch" element={<FetchDataComponent />} />
           <Route path="/sustainify/study" element={<Study />} />
+          <Route path="/sustainify/ludo" element={<Ludo />} />
+          <Route path="/sustainify/memory" element={<MemoryGame />} />
         </Routes>
       </Fragment>
     </Router>

@@ -1,0 +1,48 @@
+.game--container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1e1e2f; /* Dark background */
+    min-height: 100vh;
+    padding: 128px;
+}
+
+.game--container--header h1 {
+    font-family: 'Press Start 2P', cursive;
+    color: #f4f4f9;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.game--container--games {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.game--container--games--game {
+    background-color: #ff5722;
+    padding: 20px 40px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    transition: transform 0.3s, background-color 0.3s;
+    cursor: pointer;
+}
+
+.game--container--games--game h2 {
+    font-family: 'Press Start 2P', cursive;
+    color: #fff;
+    font-size: 1.5rem;
+    margin: 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.game--container--games--game:hover {
+    background-color: #f44336;
+    transform: scale(1.05);
+}
