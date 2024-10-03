@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../general/general.css'
+import "../general/general.css";
 // import redCircle from "./Images/red_circle.jpg";
 // import yellowCircle from "./Images/yellow_circle.jpg";
 import Header from "../general/Header";
@@ -149,7 +149,6 @@ const SnakeAndSDGs = () => {
     return board;
   };
 
-
   const rollDice = () => {
     setMessage("");
 
@@ -183,6 +182,7 @@ const SnakeAndSDGs = () => {
 
       if (newPosition > 100) {
         setMessage(`Player1 stays at ${player1Position}`);
+        setIsPlayerTurn(false);
         return;
       }
 
@@ -206,6 +206,7 @@ const SnakeAndSDGs = () => {
 
       if (newPosition > 100) {
         setMessage(`Player2 stays at ${player2Position}`);
+        setIsPlayerTurn(true);
         return;
       }
 
@@ -261,27 +262,38 @@ const SnakeAndSDGs = () => {
   };
 
   return (
-
     <div className="game-container">
-      <Header />
+      {/* <Header /> */}
+
       <h1>Snake and Ladders</h1>
       <div className="players-info">
-        <div className="player-section player1">
+        {/* <div className="player-section player1">
           <h2>Player 1</h2>
           <p>Position: {player1Position}</p>
         </div>
         <div className="player-section player2">
           <h2>Player 2</h2>
           <p>Position: {player2Position}</p>
-        </div>
+        </div> */}
       </div>
       <div
-        className={`dice-section ${isPlayerTurn ? "player1-turn" : "player2-turn"}`}
+        className={`dice-section ${
+          isPlayerTurn ? "player1-turn" : "player2-turn"
+        }`}
         onClick={rollDice}
       >
-        <img src={diceImage} alt="Dice" className="dice" style={{backgroundColor:"while", margin:"-2px"}} />
+        <img
+          src={diceImage}
+          alt="Dice"
+          className="dice"
+          style={{ backgroundColor: "while", margin: "-2px" }}
+        />
       </div>
       <div className="board">{renderBoard()}</div>
+      <p className="message" style={{ color: "white" }}>
+        {message}
+      </p>
+
       <QuizModal
         show={showQuiz}
         onClose={() => setShowQuiz(false)}

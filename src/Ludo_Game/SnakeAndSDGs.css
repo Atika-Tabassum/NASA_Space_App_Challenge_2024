@@ -5,8 +5,7 @@
     padding: 70px; 
     border-radius: 10px; 
     background-color: #1e1e2f;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 1.5rem;
+    font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
@@ -14,7 +13,6 @@
     flex-direction: column;
     align-items: center;
     color: #df7512;
-    
 }
 
 .board {
