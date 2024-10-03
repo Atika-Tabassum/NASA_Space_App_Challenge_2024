@@ -42,3 +42,9 @@
 .cell-number {
     display: none; /* Hide the cell numbers */
 }
+
+.dice {
+  width: 100px;  /* Adjust the size */
+  height: 100px; /* Adjust the size */
+  object-fit: contain; /* Ensures the aspect ratio is maintained */
+}

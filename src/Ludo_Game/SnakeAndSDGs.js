@@ -1,10 +1,18 @@
 import React, { useState } from "react";
-import redCircle from "./Images/red_circle.png";
-import yellowCircle from "./Images/yellow_circle.png";
+import redCircle from "./Images/red_circle.jpg";
+import yellowCircle from "./Images/yellow_circle.jpg";
+import dice1 from "./Images/dice1.jpg";
+import dice2 from "./Images/dice2.jpg";
+import dice3 from "./Images/dice3.jpg";
+import dice4 from "./Images/dice4.jpg";
+import dice5 from "./Images/dice5.jpg";
+import dice6 from "./Images/dice6.png";
 import QuizModal from "./QuizModal";
 import WinnerModal from "./WinnerModal";
 import "./SnakeAndSDGs.css";
 import quizzes from "./Quiz";
+
+const diceImages = [dice1, dice2, dice3, dice4, dice5, dice6];
 
 const SnakeAndSDGs = () => {
   const [player1Position, setPlayer1Position] = useState(0);
@@ -16,7 +24,8 @@ const SnakeAndSDGs = () => {
   const [diceValue, setDiceValue] = useState(null);
   const [currentQuiz, setCurrentQuiz] = useState(null);
   const [winner, setWinner] = useState(null);
-
+  const [diceImage, setDiceImage] = useState(dice1); // Initial dice image
+  
   const snakes = {
     17: 7,
     54: 34,
@@ -90,17 +99,30 @@ const SnakeAndSDGs = () => {
   };
 
   const rollDice = () => {
-    const value = Math.floor(Math.random() * 6) + 1;
-    setDiceValue(value);
-    return value;
+    setMessage("");
+
+    let flickerCount = 0;
+    const flickerInterval = setInterval(() => {
+      const randomDiceValue = Math.floor(Math.random() * 6);
+      setDiceImage(diceImages[randomDiceValue]); // Set random dice image
+      flickerCount++;
+
+      if (flickerCount > 6) {
+        clearInterval(flickerInterval);
+
+        const finalValue = Math.floor(Math.random() * 6) + 1; 
+        setDiceImage(diceImages[finalValue - 1]); 
+        setDiceValue(finalValue); 
+        movePlayer(finalValue);
+      }
+    }, 150); 
   };
 
-  const movePlayer = () => {
+  const movePlayer = (dice) => {
     if (player1Position === 100 || player2Position === 100) {
       return;
     }
 
-    const dice = rollDice();
     let newPosition;
 
     if (isPlayerTurn) {
@@ -189,18 +211,22 @@ const SnakeAndSDGs = () => {
   return (
     <div className="game-container">
       <h1>Snake and Ladders</h1>
-      <p>{message}</p>
-      <p>Dice Roll: {diceValue}</p>
-      <p>Player1 Position: {player1Position}</p>
-      <p>Player2 Position: {player2Position}</p>
-      <button
-        onClick={movePlayer}
-        disabled={
-          player1Position === 100 || player2Position === 100 || showQuiz
-        }
+      <div className="players-info">
+        <div className="player-section player1">
+          <h2>Player 1</h2>
+          <p>Position: {player1Position}</p>
+        </div>
+        <div className="player-section player2">
+          <h2>Player 2</h2>
+          <p>Position: {player2Position}</p>
+        </div>
+      </div>
+      <div
+        className={`dice-section ${isPlayerTurn ? "player1-turn" : "player2-turn"}`}
+        onClick={rollDice}
       >
-        {isPlayerTurn ? "Player1 Roll Dice" : "Player2 Roll Dice"}
-      </button>
+        <img src={diceImage} alt="Dice" className="dice" />
+      </div>
       <div className="board">{renderBoard()}</div>
       <QuizModal
         show={showQuiz}
@@ -208,7 +234,6 @@ const SnakeAndSDGs = () => {
         quiz={currentQuiz}
         onAnswer={handleQuizAnswer}
       />
-
       <WinnerModal winner={winner} onRestart={restartGame} show={!!winner} />
     </div>
   );

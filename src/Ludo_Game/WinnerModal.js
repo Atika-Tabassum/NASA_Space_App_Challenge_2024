@@ -1,9 +1,9 @@
 import React from "react";
-import "./WinnerModal.css"; // Assuming you'll style it similarly to QuizModal.css
+import "./WinnerModal.css"; 
 
 const WinnerModal = ({ winner, onRestart, show }) => {
   if (!show) {
-    return null; // If `show` is false, don't render anything
+    return null; 
   }
 
   return (
