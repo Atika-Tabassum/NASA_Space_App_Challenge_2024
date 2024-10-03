@@ -1,6 +1,7 @@
 import React from "react";
 import { Fragment } from "react";
 import "./css/main.css";
+import '../general/general.css'
 import img1 from "./image/1.jpg";
 import img2 from "./image/2.jpg";
 import img3 from "./image/3.jpg";
@@ -18,7 +19,11 @@ const gotoStats = () => {
   window.location.href = "/sustainify/stats";
 };
 
-const gotoStudy = () => { 
+const gotoDaily = () => {
+  window.location.href = "/sustainify/dailygoal";
+};
+
+const gotoStudy = () => {
   window.location.href = "/sustainify/study";
 }
 
@@ -41,15 +46,15 @@ const Home = () => {
           <p className="card--content">CHAT</p>
         </div>
         <div className="card__image">
-          <img src={img4} alt="img1" />
-          <p className="card--content">DAILY AWARDS</p>
+          <img src={img4} alt="img1" onClick={gotoDaily}/>
+          <p className="card--content">DAILY GOALS</p>
         </div>
         <div className="card__image">
-          <img src={img5} alt="img1" onClick={gotoStats}/>
+          <img src={img5} alt="img1" onClick={gotoStats} />
           <p className="card--content">STATISTICS</p>
         </div>
         <div className="card__image">
-          <img src={img6}  onClick={gotoGames} alt="img1" />
+          <img src={img6} onClick={gotoGames} alt="img1" />
           <p className="card--content">PLAY GAMES</p>
         </div>
       </div>

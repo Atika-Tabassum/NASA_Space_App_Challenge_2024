@@ -1,0 +1,56 @@
+.daily-goal-challenge {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+    font-family: "Jost", sans-serif;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.goal-list {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.goal-card {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #ffffff;
+    transition: background-color 0.3s, transform 0.2s;
+    cursor: pointer;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    height: 70px;
+    width : 300px;
+}
+
+.goal-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.goal-card.completed {
+    background-color: #e0ffe0; 
+    text-decoration: line-through;
+    color: gray;
+}
+
+.goal-title {
+    margin-left: 10px; 
+    font-size: 16px;
+}
+
+.chart-container {
+    margin-top: 30px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+}

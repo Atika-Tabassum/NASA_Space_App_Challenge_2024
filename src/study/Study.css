@@ -3,9 +3,10 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
-    margin: 20px;
+    margin-top: 180px;
+    font-family: "Jost", sans-serif;
 }
-
+/* 
 .sdg-card {
     background-color: #f9c74f;
     border-radius: 10px;
@@ -14,12 +15,12 @@
     cursor: pointer;
     transition: transform 0.2s;
     text-align: center;
-    width: 150px; /* Adjust width as needed */
+    width: 150px; 
 }
 
 .sdg-card:hover {
     transform: scale(1.05);
-    background-color: #f9a84d; /* Change color on hover */
+    background-color: #f9a84d; 
 }
 
 .sdg-card h2 {
@@ -28,10 +29,10 @@
 
 .sdg-card p {
     margin-top: 0;
-}
+} */
 
 .refresh-button {
-    background-color: #f9c74f; /* Match the card color */
+    background-color: #f9c74f;
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
@@ -40,6 +41,7 @@
     align-items: center;
     margin: 20px auto;
     transition: background-color 0.2s;
+    font-family: "Jost", sans-serif;
 }
 
 .refresh-button:hover {
@@ -50,4 +52,20 @@
     width: 24px; /* Adjust size as needed */
     height: 24px;
     margin-right: 8px; /* Space between image and text */
+}
+
+.sdg-link {
+    background-color: #f9c74f;
+    text-decoration: none; 
+    color: #000000; 
+    border: 1px solid #000000; /* Add a border */
+    padding: 10px; /* Add padding */
+    border-radius: 5px; /* Round corners */
+    display: inline-block; /* Make it a block element */
+    transition: background-color 0.3s; /* Transition for hover effect */
+}
+
+.sdg-link:hover {
+    background-color: #f9a84d; /* Change background on hover */
+    color: rgb(0, 0, 0); /* Change text color on hover */
 }

@@ -1,8 +1,8 @@
 import React, { useState, Fragment } from "react";
 import Header from "../general/Header";
 import "./Study.css"; // Import your CSS file for styling
-import refreshIcon from './imageSDG/refresh.png'; 
-
+import refreshIcon from './imageSDG/refresh.png';
+import '../general/general.css';
 const Study = () => {
     const allSDGS = [
         { id: 1, title: "No Poverty", description: "End poverty in all its forms everywhere." },
@@ -37,8 +37,19 @@ const Study = () => {
         setRandomSDGs(getRandomSDGs());
     };
 
-    const showSDGDetailedInfo = (sdg) => {
-        
+    const showSDGDetailedInfo = (sdgID) => {
+
+        return (
+            <div>
+                <iframe
+                    src={`https://sdgs.un.org/goals/goal${sdgID}`}
+                    title={`SDG ${sdgID}`}
+                    width="100%"
+                    height="500px"
+                    style={{ border: "none" }}
+                />
+            </div>
+        );
     };
 
     return (
@@ -46,10 +57,17 @@ const Study = () => {
             <Header />
             <div className="spinner--container">
                 {randomSDGs.map((sdg) => (
-                    <div className="sdg-card" key={sdg.id} onClick={() => alert(sdg.description)}>
+                    <a
+                        href={`https://sdgs.un.org/goals/goal${sdg.id}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="sdg-link" // Add your custom class here
+                        key={sdg.id}
+                    >
                         <h2>{sdg.title}</h2>
                         <p>🎉 Click for fun facts!</p>
-                    </div>
+                    </a>
+
                 ))}
             </div>
             <button className="refresh-button" onClick={refreshSDGs}>
