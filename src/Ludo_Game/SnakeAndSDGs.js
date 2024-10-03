@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import redCircle from "./Images/red_circle.jpg";
-import yellowCircle from "./Images/yellow_circle.jpg";
-import dice1 from "./Images/dice1.jpg";
-import dice2 from "./Images/dice2.jpg";
-import dice3 from "./Images/dice3.jpg";
-import dice4 from "./Images/dice4.jpg";
-import dice5 from "./Images/dice5.jpg";
+import '../general/general.css'
+// import redCircle from "./Images/red_circle.jpg";
+// import yellowCircle from "./Images/yellow_circle.jpg";
+import Header from "../general/Header";
+import dice1 from "./Images/dice1.png";
+import dice2 from "./Images/dice2.png";
+import dice3 from "./Images/dice3.png";
+import dice4 from "./Images/dice4.png";
+import dice5 from "./Images/dice5.png";
 import dice6 from "./Images/dice6.png";
 import QuizModal from "./QuizModal";
 import WinnerModal from "./WinnerModal";
@@ -25,7 +27,7 @@ const SnakeAndSDGs = () => {
   const [currentQuiz, setCurrentQuiz] = useState(null);
   const [winner, setWinner] = useState(null);
   const [diceImage, setDiceImage] = useState(dice1); // Initial dice image
-  
+
   const snakes = {
     17: 7,
     54: 34,
@@ -48,6 +50,55 @@ const SnakeAndSDGs = () => {
     80: 100,
   };
 
+  // const renderBoard = () => {
+  //   const board = [];
+  //   let currentNumber = 100;
+
+  //   for (let row = 0; row < 10; row++) {
+  //     const rowCells = [];
+
+  //     if (row % 2 === 0) {
+  //       for (let col = 0; col < 10; col++) {
+  //         rowCells.push(
+  //           <div key={currentNumber} className="board-cell">
+  //             {currentNumber === player1Position && (
+  //               <img src={redCircle} alt="Player1" className="token" />
+  //             )}
+  //             {currentNumber === player2Position && (
+  //               <img src={yellowCircle} alt="Player2" className="token" />
+  //             )}
+  //             <span className="cell-number">{currentNumber}</span>
+  //           </div>
+  //         );
+  //         currentNumber--;
+  //       }
+  //     } else {
+  //       const startNumber = currentNumber - 9;
+  //       for (let col = 0; col < 10; col++) {
+  //         rowCells.push(
+  //           <div key={startNumber + col} className="board-cell">
+  //             {startNumber + col === player1Position && (
+  //               <img src={redCircle} alt="Player" className="token" />
+  //             )}
+  //             {startNumber + col === player2Position && (
+  //               <img src={yellowCircle} alt="Bot" className="token" />
+  //             )}
+  //             <span className="cell-number">{startNumber + col}</span>
+  //           </div>
+  //         );
+  //       }
+  //       currentNumber -= 10;
+  //     }
+
+  //     board.push(
+  //       <div key={row} className="board-row">
+  //         {rowCells}
+  //       </div>
+  //     );
+  //   }
+
+  //   return board;
+  // };
   const renderBoard = () => {
     const board = [];
     let currentNumber = 100;
@@ -60,10 +111,10 @@ const SnakeAndSDGs = () => {
           rowCells.push(
             <div key={currentNumber} className="board-cell">
               {currentNumber === player1Position && (
-                <img src={redCircle} alt="Player1" className="token" />
+                <div className="token player1-token" />
               )}
               {currentNumber === player2Position && (
-                <img src={yellowCircle} alt="Player2" className="token" />
+                <div className="token player2-token" />
               )}
               <span className="cell-number">{currentNumber}</span>
             </div>
@@ -76,10 +127,10 @@ const SnakeAndSDGs = () => {
           rowCells.push(
             <div key={startNumber + col} className="board-cell">
               {startNumber + col === player1Position && (
-                <img src={redCircle} alt="Player" className="token" />
+                <div className="token player1-token" />
               )}
               {startNumber + col === player2Position && (
-                <img src={yellowCircle} alt="Bot" className="token" />
+                <div className="token player2-token" />
               )}
               <span className="cell-number">{startNumber + col}</span>
             </div>
@@ -98,6 +149,7 @@ const SnakeAndSDGs = () => {
     return board;
   };
 
+
   const rollDice = () => {
     setMessage("");
 
@@ -110,12 +162,12 @@ const SnakeAndSDGs = () => {
       if (flickerCount > 6) {
         clearInterval(flickerInterval);
 
-        const finalValue = Math.floor(Math.random() * 6) + 1; 
-        setDiceImage(diceImages[finalValue - 1]); 
-        setDiceValue(finalValue); 
+        const finalValue = Math.floor(Math.random() * 6) + 1;
+        setDiceImage(diceImages[finalValue - 1]);
+        setDiceValue(finalValue);
         movePlayer(finalValue);
       }
-    }, 150); 
+    }, 150);
   };
 
   const movePlayer = (dice) => {
@@ -209,7 +261,9 @@ const SnakeAndSDGs = () => {
   };
 
   return (
+
     <div className="game-container">
+      <Header />
       <h1>Snake and Ladders</h1>
       <div className="players-info">
         <div className="player-section player1">
@@ -225,7 +279,7 @@ const SnakeAndSDGs = () => {
         className={`dice-section ${isPlayerTurn ? "player1-turn" : "player2-turn"}`}
         onClick={rollDice}
       >
-        <img src={diceImage} alt="Dice" className="dice" />
+        <img src={diceImage} alt="Dice" className="dice" style={{backgroundColor:"while", margin:"-2px"}} />
       </div>
       <div className="board">{renderBoard()}</div>
       <QuizModal
