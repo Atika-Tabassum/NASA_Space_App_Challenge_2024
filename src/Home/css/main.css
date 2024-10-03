@@ -1,0 +1,81 @@
+.logo-section {
+  position: relative;
+}
+
+.logo-section img {
+  height: 160px;
+}
+
+.user-section img {
+  height: 100%;
+  border-radius: 50%;
+}
+
+.card--container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 70px;
+  padding: 40px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+
+}
+
+.card__image img {
+  position: relative;
+  height: 130px;
+  padding: 20px;
+  margin: 4px;
+  background-color: white;
+  border-radius: 10px;
+  border-style: solid;
+  transition: transform 0.3s ease;
+  border-width: 3px;
+  box-shadow: 0 0 13px rgba(0, 0, 0, 0.3);
+}
+
+.card__image img:hover {
+  transform: scale(1.02);
+}
+
+/* .card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 70px;
+  padding: 40px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.card__image {
+  position: relative;
+}
+
+.card__image img {
+  height: 130px;
+  padding: 25px;
+  margin: 4px;
+  background-color: white;
+  border-radius: 10px;
+  border-style: solid;
+  transition: transform 0.3s ease;
+  border-width: 3px;
+  transition: ease-in-out 0.3s;
+}
+
+.card__image:hover img {
+  transform: scale(1.03);
+} */
+
+.card--content {
+  font-family: "Play", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: larger;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
