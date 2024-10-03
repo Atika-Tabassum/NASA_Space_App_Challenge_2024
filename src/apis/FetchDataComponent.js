@@ -327,31 +327,142 @@
 // };
 
 // export default VolatilityStatus;
+// import React, { useEffect, useState } from 'react';
+// import './api.css'; // Import custom CSS for styling
+
+// const VolatilityStatus = () => {
+//   const [data, setData] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         const response = await fetch('https://data.harvestportal.org/api/3/action/datastore_search?resource_id=89a74655-322a-4d6c-9e6c-75cd156f514c&limit=46000'); 
+//         if (!response.ok) {
+//           throw new Error('Network response was not ok');
+//         }
+//         const result = await response.json();
+//         setData(result.result.records);
+//         console.log(result.result.records);
+//       } catch (error) {
+//         setError(error.message);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchData();
+//   }, []);
+
+//   // Group data by commodity name and calculate the average alert value for each commodity
+//   const groupByCommodity = (items) => {
+//     const grouped = items.reduce((acc, item) => {
+//       const commodity = item['Commodity Name'];
+//       const alertValue = item.Alert ? parseFloat(item.Alert) : 0; 
+//       if (!acc[commodity]) {
+//         acc[commodity] = { totalAlert: 0, count: 0, dates: [], commodity };
+//       }
+//       acc[commodity].totalAlert += alertValue;
+//       acc[commodity].count += 1;
+//       acc[commodity].dates.push(item.Date || 'N/A'); // Handle missing dates
+//       return acc;
+//     }, {});
+
+//     // Compute average alert for each commodity
+//     return Object.values(grouped).map((group) => {
+//       const avgAlert = group.totalAlert;
+//       console.log(avgAlert, group.totalAlert, group.count);
+//       const dates = [...new Set(group.dates)]; // Extract unique dates if needed
+//       return { ...group, avgAlert, dates };
+//     });
+//   };
+
+//   // Determine the overall volatility status based on average alert value
+//   const getVolatilityStatus = (avgAlert) => {
+//     if (avgAlert > 722) return { status: 'Low', color: 'green', icon: '🟢' };
+//     if (avgAlert >= 0 && avgAlert < 722) return { status: 'Moderate', color: 'orange', icon: '🟠' };
+//     return { status: 'High', color: 'red', icon: '🔴' };
+//   };
+
+//   const groupedData = groupByCommodity(data);
+
+//   return (
+//     <div className="volatility-status">
+//       <h1>Current Volatility Status by Commodity</h1>
+//       {loading ? (
+//         <p>Loading...</p>
+//       ) : error ? (
+//         <p>Error: {error}</p>
+//       ) : (
+//         <div className="volatility-grid">
+//           {groupedData.map((item, index) => {
+//             const { status, color, icon } = getVolatilityStatus(item.avgAlert);
+//             return (
+//               <div key={index} className={`commodity-card ${color}`}>
+//                 <div className="card-header">
+//                   <h2>{item.commodity.toUpperCase()}</h2>
+//                   <p>{item.dates[0] || 'No Date Available'}</p> {/* Handle missing dates */}
+//                 </div>
+//                 <div className="card-body">
+//                   <p><strong>{item.avgAlert.toFixed(2)}</strong> average days in {status} volatility</p>
+//                   <span className="volatility-icon">{icon}</span>
+//                 </div>
+//               </div>
+//             );
+//           })}
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default VolatilityStatus;
 import React, { useEffect, useState } from 'react';
-import './api.css'; // Import custom CSS for styling
+import './api.css'; // Ensure you add CSS for styling like the provided screenshot
 
 const VolatilityStatus = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const limit = 10000; // Maximum records per request
 
   useEffect(() => {
     const fetchData = async () => {
+      let allRecords = [];
+      let offset = 0;
+      let totalRecords = 0;
+    
       try {
-        const response = await fetch('https://data.harvestportal.org/api/3/action/datastore_search?resource_id=89a74655-322a-4d6c-9e6c-75cd156f514c&limit=46000'); 
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const result = await response.json();
-        setData(result.result.records);
-        console.log(result.result.records);
+        do {
+          const response = await fetch(`https://data.harvestportal.org/api/3/action/datastore_search?resource_id=89a74655-322a-4d6c-9e6c-75cd156f514c&limit=${limit}&offset=${offset}`);
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          const result = await response.json();
+    
+          // Filter records for the year greater than 2020
+          const filteredRecords = result.result.records.filter(item => {
+            const recordDate = new Date(item.Date);
+            console.log('Record Dates:', item.Date);
+            return recordDate.getFullYear() > 2019; // Check if the year is greater than 2020
+          });
+           // Log dates to verify the format
+
+          // Add filtered records to allRecords
+          allRecords = [...allRecords, ...filteredRecords];
+          totalRecords = result.result.total;
+          offset += limit;
+        } while (offset < totalRecords);
+    
+        setData(allRecords);
       } catch (error) {
         setError(error.message);
       } finally {
         setLoading(false);
       }
     };
-
+    
     fetchData();
   }, []);
 
@@ -359,33 +470,48 @@ const VolatilityStatus = () => {
   const groupByCommodity = (items) => {
     const grouped = items.reduce((acc, item) => {
       const commodity = item['Commodity Name'];
-      const alertValue = item.Alert ? parseFloat(item.Alert) : 0; 
+      const alertValue = item.Alert ? parseFloat(item.Alert) : 0;
+
       if (!acc[commodity]) {
         acc[commodity] = { totalAlert: 0, count: 0, dates: [], commodity };
       }
-      acc[commodity].totalAlert += alertValue;
-      acc[commodity].count += 1;
-      acc[commodity].dates.push(item.Date || 'N/A'); // Handle missing dates
+
+      if (!isNaN(alertValue)) {
+        acc[commodity].totalAlert += alertValue;
+        acc[commodity].count += 1;
+      }
+
+      if (item.Date) {
+        acc[commodity].dates.push(item.Date);
+      }
+
       return acc;
     }, {});
 
-    // Compute average alert for each commodity
     return Object.values(grouped).map((group) => {
-      const avgAlert = group.totalAlert;
-      console.log(avgAlert, group.totalAlert, group.count);
-      const dates = [...new Set(group.dates)]; // Extract unique dates if needed
+      const avgAlert = group.count > 0 ? group.totalAlert / group.count : 0;
+      const dates = [...new Set(group.dates)];
       return { ...group, avgAlert, dates };
     });
   };
 
-  // Determine the overall volatility status based on average alert value
-  const getVolatilityStatus = (avgAlert) => {
-    if (avgAlert > 722) return { status: 'Low', color: 'green', icon: '🟢' };
-    if (avgAlert >= 0 && avgAlert < 722) return { status: 'Moderate', color: 'orange', icon: '🟠' };
-    return { status: 'High', color: 'red', icon: '🔴' };
-  };
-
   const groupedData = groupByCommodity(data);
+  // Add this function within your VolatilityStatus component
+const formatDate = (date) => {
+  const parsedDate = new Date(date);
+  if (!isNaN(parsedDate)) {
+    return parsedDate.toLocaleDateString(); // Format date as "MM/DD/YYYY" or other locale formats
+  }
+  return 'N/A'; // Handle invalid date
+};
+
+// Add this function within your VolatilityStatus component
+const getVolatilityStatus = (avgAlert) => {
+  if (avgAlert > 722) return { status: 'Low', color: 'green', icon: '🟢' };
+  if (avgAlert >= 0 && avgAlert <= 722) return { status: 'Moderate', color: 'orange', icon: '🟠' };
+  return { status: 'High', color: 'red', icon: '🔴' };
+};
+
 
   return (
     <div className="volatility-status">
@@ -402,10 +528,10 @@ const VolatilityStatus = () => {
               <div key={index} className={`commodity-card ${color}`}>
                 <div className="card-header">
                   <h2>{item.commodity.toUpperCase()}</h2>
-                  <p>{item.dates[0] || 'No Date Available'}</p> {/* Handle missing dates */}
+                  <p>{item.dates.length > 0 ? formatDate(item.dates[0]) : 'No Date Available'}</p>
                 </div>
                 <div className="card-body">
-                  <p><strong>{item.avgAlert.toFixed(2)}</strong> average days in {status} volatility</p>
+                  <p><strong>{item.avgAlert.toFixed(2)}</strong> days in {status} volatility</p>
                   <span className="volatility-icon">{icon}</span>
                 </div>
               </div>
