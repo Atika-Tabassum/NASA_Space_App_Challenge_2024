@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import "../general/general.css";
 // import redCircle from "./Images/red_circle.jpg";
 // import yellowCircle from "./Images/yellow_circle.jpg";
-import Header from "../general/Header";
+// import Header from "../general/Header";
+import "../general/general.css";
+import { Fragment } from "react";
 import dice1 from "./Images/dice1.png";
 import dice2 from "./Images/dice2.png";
 import dice3 from "./Images/dice3.png";
@@ -13,6 +15,8 @@ import QuizModal from "./QuizModal";
 import WinnerModal from "./WinnerModal";
 import "./SnakeAndSDGs.css";
 import quizzes from "./Quiz";
+import logo from "../Home/image/logo8-removebg-preview.png";
+import Header from "../general/Header";
 
 const diceImages = [dice1, dice2, dice3, dice4, dice5, dice6];
 
@@ -50,55 +54,6 @@ const SnakeAndSDGs = () => {
     80: 100,
   };
 
-  // const renderBoard = () => {
-  //   const board = [];
-  //   let currentNumber = 100;
-
-  //   for (let row = 0; row < 10; row++) {
-  //     const rowCells = [];
-
-  //     if (row % 2 === 0) {
-  //       for (let col = 0; col < 10; col++) {
-  //         rowCells.push(
-  //           <div key={currentNumber} className="board-cell">
-  //             {currentNumber === player1Position && (
-  //               <img src={redCircle} alt="Player1" className="token" />
-  //             )}
-  //             {currentNumber === player2Position && (
-  //               <img src={yellowCircle} alt="Player2" className="token" />
-  //             )}
-  //             <span className="cell-number">{currentNumber}</span>
-  //           </div>
-  //         );
-  //         currentNumber--;
-  //       }
-  //     } else {
-  //       const startNumber = currentNumber - 9;
-  //       for (let col = 0; col < 10; col++) {
-  //         rowCells.push(
-  //           <div key={startNumber + col} className="board-cell">
-  //             {startNumber + col === player1Position && (
-  //               <img src={redCircle} alt="Player" className="token" />
-  //             )}
-  //             {startNumber + col === player2Position && (
-  //               <img src={yellowCircle} alt="Bot" className="token" />
-  //             )}
-  //             <span className="cell-number">{startNumber + col}</span>
-  //           </div>
-  //         );
-  //       }
-  //       currentNumber -= 10;
-  //     }
-
-  //     board.push(
-  //       <div key={row} className="board-row">
-  //         {rowCells}
-  //       </div>
-  //     );
-  //   }
-
-  //   return board;
-  // };
   const renderBoard = () => {
     const board = [];
     let currentNumber = 100;
@@ -261,25 +216,17 @@ const SnakeAndSDGs = () => {
     setWinner(null);
   };
 
-  return (
+  return <Fragment>
+    {/* <Header/> */}
     <div className="game-container">
       {/* <Header /> */}
 
-      <h1>Snake and Ladders</h1>
+      <h1 style={{fontFamily:'Play'}}>Snake and Ladders</h1>
       <div className="players-info">
-        {/* <div className="player-section player1">
-          <h2>Player 1</h2>
-          <p>Position: {player1Position}</p>
-        </div>
-        <div className="player-section player2">
-          <h2>Player 2</h2>
-          <p>Position: {player2Position}</p>
-        </div> */}
       </div>
       <div
-        className={`dice-section ${
-          isPlayerTurn ? "player1-turn" : "player2-turn"
-        }`}
+        className={`dice-section ${isPlayerTurn ? "player1-turn" : "player2-turn"
+          }`}
         onClick={rollDice}
       >
         <img
@@ -302,7 +249,7 @@ const SnakeAndSDGs = () => {
       />
       <WinnerModal winner={winner} onRestart={restartGame} show={!!winner} />
     </div>
-  );
+  </Fragment>
 };
 
 export default SnakeAndSDGs;
