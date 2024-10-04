@@ -2,18 +2,18 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './memory_card.css'; // Import the CSS
 
 const cardArray = [
-  { name: 'star', img: '/images/star.jpg' },
-  { name: 'star', img: '/images/star.jpg' },
-  { name: 'moon', img: '/images/moon.jpg' },
-  { name: 'moon', img: '/images/moon.jpg' },
-  { name: 'planet', img: '/images/planet.jpg' },
-  { name: 'planet', img: '/images/planet.jpg' },
-  { name: 'rocket', img: '/images/rocket.jpg' },
-  { name: 'rocket', img: '/images/rocket.jpg' },
-  { name: 'astronaut', img: '/images/astronaut.jpg' },
-  { name: 'astronaut', img: '/images/astronaut.jpg' },
-  { name: 'alien', img: '/images/alien.jpg' },
-  { name: 'alien', img: '/images/alien.jpg' }
+  { name: 'star', img: '/images/3.png' },
+  { name: 'star', img: '/images/3.png' },
+  { name: 'moon', img: '/images/4.png' },
+  { name: 'moon', img: '/images/4.png' },
+  { name: 'planet', img: '/images/5.png' },
+  { name: 'planet', img: '/images/5.png' },
+  { name: 'rocket', img: '/images/6.png' },
+  { name: 'rocket', img: '/images/6.png' },
+  { name: 'astronaut', img: '/images/7.png' },
+  { name: 'astronaut', img: '/images/7.png' },
+  { name: 'alien', img: '/images/8.png' },
+  { name: 'alien', img: '/images/8.png' }
 ];
 
 cardArray.sort(() => 0.5 - Math.random());
