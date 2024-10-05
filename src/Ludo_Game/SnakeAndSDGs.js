@@ -219,7 +219,6 @@ const SnakeAndSDGs = () => {
   return <Fragment>
     {/* <Header/> */}
     <div className="game-container">
-      {/* <Header /> */}
 
       <h1 style={{fontFamily:'Play'}}>Snake and Ladders</h1>
       <div className="players-info">

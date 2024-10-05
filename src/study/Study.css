@@ -42,6 +42,7 @@
     margin: 20px auto;
     transition: background-color 0.2s;
     font-family: "Jost", sans-serif;
+    color: black;
 }
 
 .refresh-button:hover {
