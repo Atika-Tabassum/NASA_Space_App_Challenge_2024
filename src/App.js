@@ -10,6 +10,7 @@ import Study from "./study/Study";
 import DailyGoal from "./dailygoal/DailyGoal";
 import Awareness from "./awareness/Awareness";
 import Chat from "./chatComponent/Chat";
+import NasaTechnologyTransfer from "./NasaTechnologyTransfer";
 function App() {
   return (
     <Router>
@@ -27,6 +28,7 @@ function App() {
           <Route path="/sustainify/dailygoal" element={<DailyGoal />} />
           <Route path="/sustainify/awareness" element={<Awareness />} />
           <Route path="/sustainify/chat" element={<Chat />} />
+          <Route path="/sustainify/test" element={<NasaTechnologyTransfer />} />
         </Routes>
       </Fragment>
     </Router>
