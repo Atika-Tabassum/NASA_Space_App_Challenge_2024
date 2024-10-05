@@ -1,0 +1,50 @@
+.front-page {
+    margin-top: 180px;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+}
+
+.front-page__content {
+    display: grid;
+    column-gap: 0;
+    grid-template-columns: 1fr 1fr; /* Split the content in two */
+    /* flex-direction: column; */
+    /* justify-content: space-between; 
+    align-items: left; */
+    height: 100%; /* Make the content take full height */
+}
+
+.welcome-text {
+    font-family: "Jost";
+    font-weight: 900;
+    font-size: 70px;
+    color: #1d3b1d;
+    margin: 0;
+    padding-top: 50px;
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.front-page__bottom {
+    width: 30%;
+    /* height: 50%;  */
+    /* display: flex;
+    justify-content: left;
+    align-items: left; */
+}
+
+.front-page__image {
+    width: 300%;
+    
+}
+
+
+.description--container
+{
+    font-family: "Jost";
+    font-weight: 400;
+    font-size: 20px;
+}
