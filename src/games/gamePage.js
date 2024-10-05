@@ -22,7 +22,7 @@ const GamePage = () => {
         window.location.href = `/sustainify/${gamelink}`;
     }
     return <Fragment>
-        <Header />
+        <Header title="Games" />
         <div className="game--container">
             <div className="game--container--header">
                 <h1>Games</h1>
