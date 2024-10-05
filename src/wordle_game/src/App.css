@@ -1,0 +1,183 @@
+.App {
+  text-align: center;
+  background-color: #D9F3B7;
+  height: 100vh; /* Ensure it uses the full height of the viewport */
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: space-between; /* Ensure space between elements */
+  color: rgb(42, 38, 38);
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  overflow: hidden; /* Disable scrolling */
+}
+
+nav {
+  height: 60px;
+  width: 100%;
+  margin: 0;
+  border-bottom: 1px solid grey;
+  display: grid;
+  place-items: center;
+}
+
+nav h1 {
+  margin: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  color: rgb(49, 46, 46);
+  font-size: 45px;
+}
+
+.game {
+  flex-grow: 1; /* Allow the game area to take up remaining space */
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center; /* Center vertically */
+  padding: 0;
+}
+
+.board {
+  width: 100%; /* Make board responsive */
+  max-width: 450px;
+  height: auto; /* Allow height to adjust */
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 2px;
+}
+
+.letter {
+  width: 50px; /* Reduce letter size */
+  height: 50px; /* Adjust height accordingly */
+  border: 1px solid rgb(90, 86, 86);
+  margin: 2px;
+  display: grid;
+  place-items: center;
+  font-size: 24px; /* Slightly reduce font size */
+  font-weight: bolder;
+  color: rgb(180, 173, 173);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#correct {
+  background-color: #528d4e;
+}
+
+#almost {
+  background-color: #ae961d;
+}
+
+#error {
+  background-color: #3a393c;
+}
+
+.keyboard {
+  width: 100%; /* Make keyboard responsive */
+  max-width: 700px;
+  height: auto; /* Allow height to adjust */
+  margin-bottom: 10px;
+}
+
+.line1, .line2, .line3 {
+  display: flex;
+  justify-content: center;
+  margin: 2px;
+}
+
+.key {
+  width: 40px; /* Reduce key size */
+  height: 60px; /* Adjust key height */
+  margin: 2px;
+  border-radius: 4px;
+  display: grid;
+  place-items: center;
+  font-size: 18px; /* Reduce font size slightly */
+  background-color: grey;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: pointer;
+}
+
+#big {
+  width: 80px; /* Adjust size for larger keys */
+}
+
+#disabled {
+  background-color: #3a393c;
+}
+/* Button styles */
+.button {
+  background-color: #4CAF50; /* Green background */
+  border: none; /* No border */
+  color: white; /* White text */
+  padding: 15px 32px; /* Padding */
+  text-align: center; /* Centered text */
+  text-decoration: none; /* No underline */
+  display: inline-block; /* Inline block */
+  font-size: 16px; /* Font size */
+  margin: 4px 2px; /* Margin */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 4px; /* Rounded corners */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+.button:active {
+  background-color: #388e3c; /* Even darker green when pressed */
+  transform: translateY(2px); /* Slightly lower when pressed */
+}
+/* components/SdgLesson.css */
+.sdg-lesson {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  text-align: center;
+}
+
+.lesson-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.lesson-content {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.next-level-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.next-level-button:hover {
+  background-color: #45a049;
+}

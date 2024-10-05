@@ -31,6 +31,10 @@ const gotoAwareness = () => {
   window.location.href = "/sustainify/awareness";
 }
 
+const gotoChat = () => {
+  window.location.href = "/sustainify/chat";
+}
+
 const Home = () => {
   return <Fragment>
     <div>
@@ -46,7 +50,7 @@ const Home = () => {
           <p className="card--content">RAISING AWARENESS</p>
         </div>
         <div className="card__image">
-          <img src={img3} alt="img1" />
+          <img src={img3} alt="img1" onClick={gotoChat}/>
           <p className="card--content">CHAT</p>
         </div>
         <div className="card__image">

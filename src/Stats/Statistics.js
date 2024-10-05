@@ -9,7 +9,7 @@ import './stat.css';
 const Statistics = () => {
     return (
         <Fragment>
-            <Header />
+            <Header title="Statistics"/>
             <div className="stats-container">
                 <div className='datacard stat1'>
                     <Line
